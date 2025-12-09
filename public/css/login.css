@@ -1,0 +1,116 @@
+/**
+ * Copyright 2025 ariefsetyonugroho
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f0f2f5;
+}
+
+.login-container {
+    background: #fff;
+    padding: 40px 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+form input {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+form input:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+.error-message {
+    color: red;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #007BFF;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+p {
+    margin-top: 10px;
+}
+
+.cek-bpm-button {
+    width: 100%;
+    padding: 12px;
+    background: #28a745; /* hijau */
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.cek-bpm-button:hover {
+    background: #218838;
+}
+
+
+@media (max-width: 480px) {
+    .login-container {
+        padding: 30px 20px;
+    }
+}

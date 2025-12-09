@@ -30,7 +30,7 @@ class BpmController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi (opsional, tapi disarankan)
+        // Validasi
         $request->validate([
             'user_id' => 'required',
             'age'     => 'required',
@@ -39,24 +39,42 @@ class BpmController extends Controller
             'bpm'     => 'required',
         ]);
 
-        // Cari record terakhir berdasarkan user_id
-        $lastRecord = Bpm::where('user_id', $request->user_id)
+        $userId = $request->user_id;
+        $now = now();
+
+        // Cari record terakhir user
+        $lastRecord = Bpm::where('user_id', $userId)
                         ->orderBy('record_id', 'desc')
+                        ->orderBy('created_at', 'desc')
                         ->first();
 
-        // Jika ada → record_id = last + 1
-        // Jika tidak ada → mulai dari 1
-        $nextRecordId = $lastRecord ? $lastRecord->record_id + 1 : 1;
+        if ($lastRecord) {
+            // Hitung selisih waktu antara data terakhir dan sekarang
+            $diffSeconds = $lastRecord->created_at->diffInSeconds($now);
 
+            if ($diffSeconds > 60) {
+                // Lebih dari 60 detik → buat record_id baru
+                $recordId = $lastRecord->record_id + 1;
+            } else {
+                // Masih dalam 60 detik → gunakan record_id yang sama
+                $recordId = $lastRecord->record_id;
+            }
+        } else {
+            // Tidak ada data sebelumnya → mulai dari 1
+            $recordId = 1;
+        }
+
+        // Simpan data
         $bpm = Bpm::create([
-            'user_id'       => $request->user_id,
-            'record_id'     => $nextRecordId,
-            'age'           => $request->age,
-            'gender'        => $request->gender,
-            'status'        => $request->status,
-            'bpm'           => $request->bpm,
+            'user_id'   => $userId,
+            'record_id' => $recordId,
+            'age'       => $request->age,
+            'gender'    => $request->gender,
+            'status'    => $request->status,
+            'bpm'       => $request->bpm,
         ]);
 
-        return new BpmResource(true, 'Data Berhasil Ditambahkan!', $bpm);
+        return new BpmResource(true, 'Data berhasil disimpan', $bpm);
     }
+
 }

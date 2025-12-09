@@ -18,3 +18,7 @@
 
 ### [added]
 - Add API Endpoint
+- Add Login
+- Add Dashboard
+- Add Register
+- Add Cek BPM Realtime

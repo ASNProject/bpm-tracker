@@ -1,0 +1,146 @@
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: linear-gradient(90deg, #007BFF, #00C6FF);
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+header a, header button {
+    color: #fff;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Main Content */
+.main { padding: 20px 30px; font-family: Arial, sans-serif; }
+
+/* Card Realtime */
+.card {
+    background: #f1f7ff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.card p { margin: 5px 0; font-size: 16px; }
+
+/* Filter Form */
+.filter-form {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.filter-form input, .filter-form select {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.filter-form button {
+    padding: 5px 15px;
+    border-radius: 5px;
+    border: none;
+    background: #007BFF;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Grid container untuk chart + table */
+.dashboard-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Chart container */
+.chart-container {
+    flex: 1 1 400px;
+    background: #f1f7ff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Table container */
+.table-container {
+    flex: 1 1 600px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow-x: auto;
+}
+.table-container table { width: 100%; }
+.table-container table th { background: #007BFF; color: #fff; }
+
+/* Buttons */
+button, a.button { padding: 5px 10px; border: none; border-radius: 4px; text-decoration: none; cursor: pointer; margin-right: 5px; }
+button.delete { background: #dc3545; }
+a.button.export { background: #28a745; }
+
+/* Filter + action buttons container */
+.filter-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+/* Filter form */
+.filter-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Action buttons */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* Semua button dan select */
+.filter-form select,
+.filter-form button,
+.action-buttons .button,
+.action-buttons button.delete {
+    height: 36px;            /* tinggi konsisten */
+    padding: 0 12px;         /* horizontal padding */
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    display: flex;           /* flex agar teks center */
+    align-items: center;     /* vertikal center */
+    justify-content: center; /* horizontal center */
+    box-sizing: border-box;
+    line-height: normal;     /* hindari teks terlalu rendah/tinggi */
+    cursor: pointer;
+}
+
+/* Khusus tombol warna */
+.action-buttons .button.export { background: #28a745; color: #fff; border: none; }
+.action-buttons button.delete { background: #dc3545; color: #fff; border: none; }
+
+/* Flex container */
+.filter-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;  /* teks vertikal center */
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filter-form, .action-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center; /* teks vertikal center */
+}
+
