@@ -66,6 +66,6 @@ class AuthController extends Controller
         ]);
 
         // Redirect ke login dengan flash message
-        return redirect()->route('login.form')->with('success', 'Registrasi berhasil. Silakan login.');
+        return redirect()->route('login')->with('success', 'Registrasi berhasil. Silakan login.');
     }
 }
