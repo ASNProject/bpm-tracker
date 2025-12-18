@@ -32,7 +32,7 @@
 
         {{-- Tombol Cek BPM --}}
         <form action="{{ route('cek.bpm') }}" method="GET" style="margin-top: 10px;">
-            <button type="submit" class="cek-bpm-button">Cek BPM</button>
+            <button type="submit" class="cek-bpm-button">Manual</button>
         </form>
         
         <p>Belum punya akun? <a href="{{ route('register.form') }}">Register</a></p>

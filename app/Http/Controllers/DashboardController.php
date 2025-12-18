@@ -7,6 +7,8 @@ use App\Models\Bpm;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use App\Models\Buffplot;
+
 
 class DashboardController extends Controller
 {
@@ -32,8 +34,15 @@ class DashboardController extends Controller
 
         $records = $query->orderBy('created_at', 'asc')->get();
         $latestData = $records->last();
+        
+        $buffplots = Buffplot::where('user_id', $user->name)
+            ->orderBy('idx', 'desc')
+            ->limit(460)
+            ->get()
+            ->reverse() 
+            ->values();
 
-        return view('dashboard', compact('user','records','latestData','lastRecordId','recordIds'));
+        return view('dashboard', compact('user','records','latestData','lastRecordId','recordIds', 'buffplots'));
     }
 
 
@@ -42,6 +51,7 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         Bpm::where('user_id', $user->name)->delete();
+        Buffplot::where('user_id', $user->name)->delete();
 
         return redirect()->back()->with('success', 'All records deleted successfully.');
     }
@@ -98,4 +108,25 @@ class DashboardController extends Controller
             'latest'  => $latest
         ]);
     }
+    
+    public function buffplotRealtime()
+    {
+        $user = Auth::user();
+    
+        $buffplots = Buffplot::where('user_id', $user->name)
+            ->whereIn('id', function ($q) use ($user) {
+                $q->selectRaw('MAX(id)')
+                  ->from('buffplots')
+                  ->where('user_id', $user->name)
+                  ->groupBy('idx');
+            })
+            ->orderBy('idx', 'desc')
+            ->limit(460)
+            ->get()
+            ->reverse()
+            ->values();
+    
+        return response()->json($buffplots);
+    }
+
 }

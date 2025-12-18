@@ -10,7 +10,7 @@
 <body>
     <div class="header">
         <h2>BPM Realtime</h2>
-        <form action="{{ route('login.form') }}" method="GET">
+        <form action="{{ route('login') }}" method="GET">
             <button type="submit" class="back-login-button">Kembali ke Login</button>
         </form>
     </div>

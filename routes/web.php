@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BpmSingleController;
+use App\Http\Controllers\Api\BpmController;
 
 Route::get('/', function () {
     return redirect('/dashboard');
@@ -31,3 +32,15 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/cek-bpm', [BpmSingleController::class, 'index'])->name('cek.bpm');
 Route::get('/cek-bpm/data', [BpmSingleController::class, 'data'])->name('cek.bpm.data');
+
+Route::get('/dashboard/buffplot-realtime', 
+    [DashboardController::class, 'buffplotRealtime']
+)->name('dashboard.buffplot.realtime');
+
+
+
+// // Endpoint untuk menyimpan data BPM
+// Route::post('/bpm', [BpmController::class, 'store'])->name('api.bpm.store');
+
+// // Endpoint untuk menampilkan list BPM
+// Route::get('/bpm', [BpmController::class, 'index'])->name('api.bpm.index');

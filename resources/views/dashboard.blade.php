@@ -105,27 +105,33 @@
 </div>
 
 <script>
-function formatDateLabel(datetime){
+function formatTableTime(datetime) {
     const d = new Date(datetime);
-    const day = String(d.getDate()).padStart(2,'0');
-    const month = String(d.getMonth()+1).padStart(2,'0'); // bulan 0-11
-    const year = d.getFullYear();
-    return `${day}-${month}-${year}`;
+
+    const hh = String(d.getHours()).padStart(2, '0');
+    const mm = String(d.getMinutes()).padStart(2, '0');
+    const DD = String(d.getDate()).padStart(2, '0');
+    const MMM = d.toLocaleString('id-ID', { month: 'short' });
+    const YYYY = d.getFullYear();
+
+    return `${hh}:${mm} ${DD}:${MMM}:${YYYY}`;
 }
+
+
 
 let bpmChart;
 function renderChart(labels, data){
     // Format labels menjadi tanggal-bulan-tahun
-    const formattedLabels = labels.map(l => formatDateLabel(l));
+    // const formattedLabels = labels.map(l => formatDateLabel(l));
 
     const ctx = document.getElementById('bpmChart').getContext('2d');
     if(bpmChart) bpmChart.destroy();
     bpmChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: formattedLabels,
+            labels: labels,
             datasets: [{
-                label: 'BPM',
+                label: 'ECG',
                 data: data,
                 backgroundColor: 'rgba(0,123,255,0.2)',
                 borderColor: 'rgba(0,123,255,1)',
@@ -143,8 +149,8 @@ function renderChart(labels, data){
 
 // Initial render
 renderChart(
-    {!! $records->pluck('created_at') !!},
-    {!! $records->pluck('bpm') !!}
+    {!! $buffplots->pluck('idx') !!},
+    {!! $buffplots->pluck('value') !!}
 );
 
 
@@ -171,15 +177,20 @@ setInterval(() => {
                     <td>${r.gender}</td>
                     <td>${r.status}</td>
                     <td>${r.bpm}</td>
-                    <td>${r.created_at}</td>
+                    <td>${formatTableTime(r.created_at)}</td>
                 </tr>`;
             });
             $("#recordsTable tbody").html(tableHtml);
 
-            // Update Chart
-            const labels = res.records.map(r => r.created_at);
-            const data = res.records.map(r => r.bpm);
-            renderChart(labels, data);
+        }
+    });
+    
+    $.get("{{ route('dashboard.buffplot.realtime') }}", function(buffplots){
+        if(buffplots.length > 0){
+            renderChart(
+                buffplots.map(b => b.idx),
+                buffplots.map(b => b.value)
+            );
         }
     });
 }, 2000);
