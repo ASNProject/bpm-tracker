@@ -65,7 +65,7 @@
 
         {{-- Chart --}}
         <div class="chart-container">
-            <h4>BPM Chart (Record ID: {{ $lastRecordId }})</h4>
+            <h4>ECG Chart (Record ID: {{ $lastRecordId }})</h4>
             <canvas id="bpmChart" width="400" height="300"></canvas>
         </div>
 
