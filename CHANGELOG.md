@@ -22,3 +22,4 @@
 - Add Dashboard
 - Add Register
 - Add Cek BPM Realtime
+- Add Buffplot 

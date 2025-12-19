@@ -94,6 +94,23 @@ Body:
 Route : http://127.0.0.1:8000/api/bpm-single
 ```
 
+##### Buffplot
+- Post
+```
+Route : http://127.0.0.1:8000/api/buffplot
+
+Body: 
+{
+    "user_id": <string>,
+    "buffplot": [int,int]
+}
+```
+
+- Get 
+```
+Route : http://127.0.0.1:8000/api/buffplots
+```
+
 ## Notes
 - Versi Larvel 12.0
 
